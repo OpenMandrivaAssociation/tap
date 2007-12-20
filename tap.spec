@@ -1,8 +1,9 @@
 %define	name	tap
 %define	version	1.01
-%define	release	%mkrel 3
+%define	release	%mkrel 4
 %define	major	0
-%define	libname	%mklibname %{name} %{major}
+%define	libname	    %mklibname %{name} %{major}
+%define develname   %mklibname -d %{name}
 
 Name:		%{name}
 Version:	%{version}
@@ -19,24 +20,24 @@ consistent with the Test Anything Protocol.  A test harness that parses this
 protocol can run these tests and produce useful reports indicating their
 success or failure.
 
-%package -n	%libname
+%package -n	%{libname}
 Summary:	Write tests that implement the Test Anything Protocol
 Group:		System/Libraries
 
-%description -n	%libname
+%description -n	%{libname}
 The tap library provides functions for writing test scripts that produce output
 consistent with the Test Anything Protocol.  A test harness that parses this
 protocol can run these tests and produce useful reports indicating their
 success or failure.
 
-%package -n	%libname-devel 
+%package -n	%{develname} 
 Summary:	Development files for %{name}
 Group:		Development/C
-Requires:	%libname = %{version}
+Requires:	%{libname} = %{version}
 Provides:	%{name}-devel = %{version}-%{release}
-Provides:	lib%{name}-devel = %{version}-%{release}
+Obsoletes:	%{mklibname -d %{name} 0}
 
-%description -n	%libname-devel
+%description -n	%{develname}
 This package contains development files for %{name}.
 
 %prep
@@ -54,15 +55,15 @@ chmod 644 %{buildroot}%{_libdir}/*.la
 %clean
 rm -rf %{buildroot}
 
-%post -n %libname -p /sbin/ldconfig
-%postun -n %libname -p /sbin/ldconfig
+%post -n %{libname} -p /sbin/ldconfig
+%postun -n %{libname} -p /sbin/ldconfig
 
-%files -n %libname
+%files -n %{libname}
 %defattr(-,root,root)
 %doc INSTALL README
 %{_libdir}/*.so.*
 
-%files -n %libname-devel
+%files -n %{develname}
 %defattr(-,root,root)
 %{_libdir}/*.la
 %{_libdir}/*.so
