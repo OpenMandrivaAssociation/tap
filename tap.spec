@@ -13,6 +13,7 @@ License:	GPL
 Group:		System/Libraries
 URL:		http://jc.ngo.org.uk/trac-bin/trac.cgi/wiki/LibTap
 Source:		http://people.freebsd.org/~nik/public_distfiles/%{name}-%{version}.tar.bz2
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 The tap library provides functions for writing test scripts that produce output
