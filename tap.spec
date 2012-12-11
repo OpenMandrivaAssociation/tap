@@ -1,6 +1,6 @@
 %define	name	tap
 %define	version	1.01
-%define	release	%mkrel 8
+%define	release	8
 %define	major	0
 %define	libname	    %mklibname %{name} %{major}
 %define develname   %mklibname -d %{name}
@@ -9,11 +9,11 @@ Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 Summary:	Write tests that implement the Test Anything Protocol
-License:	BSD
+License:	GPL
 Group:		System/Libraries
 URL:		http://jc.ngo.org.uk/trac-bin/trac.cgi/wiki/LibTap
 Source:		http://people.freebsd.org/~nik/public_distfiles/%{name}-%{version}.tar.bz2
-BuildRoot:	%{_tmppath}/%{name}-%{version}
+
 
 %description
 The tap library provides functions for writing test scripts that produce output
@@ -49,19 +49,14 @@ This package contains development files for %{name}.
 %make CFLAGS+=-UHAVE_LIBPTHREAD
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
-chmod 644 %{buildroot}%{_libdir}/*.la
+rm -fr %{buildroot}%{_libdir}/*.*a
 
-%clean
-rm -rf %{buildroot}
-
-%if %mdkversion < 200900
 %post -n %{libname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
+
+
 %postun -n %{libname} -p /sbin/ldconfig
-%endif
+
 
 %files -n %{libname}
 %defattr(-,root,root)
@@ -70,9 +65,7 @@ rm -rf %{buildroot}
 
 %files -n %{develname}
 %defattr(-,root,root)
-%{_libdir}/*.la
 %{_libdir}/*.so
-%{_libdir}/*.a
 %{_includedir}/*
 %{_mandir}/man3/*
 
