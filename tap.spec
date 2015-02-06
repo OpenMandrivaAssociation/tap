@@ -1,6 +1,6 @@
 %define	name	tap
 %define	version	1.01
-%define	release	8
+%define release	9
 %define	major	0
 %define	libname	    %mklibname %{name} %{major}
 %define develname   %mklibname -d %{name}
