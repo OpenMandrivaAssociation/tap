@@ -11,7 +11,7 @@ Release:	%{release}
 Summary:	Write tests that implement the Test Anything Protocol
 License:	GPL
 Group:		System/Libraries
-URL:		http://jc.ngo.org.uk/trac-bin/trac.cgi/wiki/LibTap
+URL:		https://jc.ngo.org.uk/trac-bin/trac.cgi/wiki/LibTap
 Source:		http://people.freebsd.org/~nik/public_distfiles/%{name}-%{version}.tar.bz2
 
 
